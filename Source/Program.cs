@@ -141,7 +141,9 @@ namespace NewEggStockMonitor
             Regex inStockPattern = new Regex(@"add to cart", RegexOptions.IgnoreCase);
             if (inStockPattern.IsMatch(httpContent))
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"[{DateTime.Now:hh:mm:ss tt}] - Item in stock!");
+                Console.ResetColor();
                 BringToFront();
             }
             else
