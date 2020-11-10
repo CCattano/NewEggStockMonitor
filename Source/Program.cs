@@ -37,9 +37,9 @@ namespace NewEggStockMonitor
                 {
                     //Empty console window text to see if it will bring memory usage back below arbitrary 15Mb cap.
                     Console.Clear();
-                    Console.WriteLine("Press any key to stop polling.\n");
                     if (GC.GetTotalMemory(true) < MegabyteCap)
                     {
+                        Console.WriteLine("Press any key to stop polling.\n");
                         return;
                     }
                     Timer.Change(Timeout.Infinite, Timeout.Infinite);
@@ -60,7 +60,7 @@ namespace NewEggStockMonitor
             {
                 pingDelay = TryAgain(true);
             }
-            else if(pingDelay < 1)
+            else if (pingDelay < 1)
             {
                 pingDelay = TryAgain(false);
             }
