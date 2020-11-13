@@ -181,7 +181,7 @@ namespace NewEggStockMonitor
             Timer = new Timer(state => CheckStock(memUsage), null, TimeSpan.Zero, TimeSpan.FromSeconds(PingDelay));
             if (SendAmAliveSMS)
             {
-                DateTime nextWholeHour = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour + 1, DateTime.Now.Minute, 0, 0);
+                DateTime nextWholeHour = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour + 1, 0, 0, 0);
                 TimeSpan hourDiff = nextWholeHour.TimeOfDay - DateTime.Now.TimeOfDay;
                 AmAliveTimer = new Timer(state => SendText("NewEgg Stock Monitor Status", "I'm still running! Haven't found anything tho... ):").GetAwaiter().GetResult(), null, hourDiff, TimeSpan.FromHours(1));
             }
