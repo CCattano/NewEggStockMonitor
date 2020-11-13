@@ -89,17 +89,19 @@ namespace NewEggStockMonitor
             //PHONE CARRIER
             WriteDefaultHeader();
             Console.Write("\nSelect your phone carrier from the list below by entering the number that corresponds to your carrier\n\n");
+            Console.WriteLine(" 0 - None of the below");
             List<string> carriers = Carriers.Select(kvp => kvp.Key).ToList();
             foreach ((string carrier, int index) in carriers.Select((v, i) => (v, i + 1)))
             {
-                Console.WriteLine($"{index} - {carrier}");
+                Console.WriteLine($"{(index.ToString().Length == 1 ? $" {index}" : $"{index}")} - {carrier}");
             }
-            Console.WriteLine($"{Carriers.Count + 1} - None of the above\n");
+            Console.Write("\nCarrier's Number: ");
             PhoneCarrier = Console.ReadLine();
-            if (PhoneCarrier == $"{Carriers.Count + 1}")
+            if (PhoneCarrier == "0")
             {
-                Console.WriteLine("Sorry I got no free way to get a text out to you via your carrier.");
-                Console.WriteLine("Ain't nobody got time to be spendin no money on Twilio up in here");
+                Console.Clear();
+                CConsole.ColorWriteLine(ConsoleColor.Red, "Sorry I got no free way to get a text out to you via your carrier.\n");
+                CConsole.ColorWriteLine(ConsoleColor.Yellow, "Ain't nobody got time to be spendin no money on Twilio up in here\n");
                 return;
             }
             PhoneCarrier = Carriers[carriers[int.Parse(PhoneCarrier) - 1]]; //Ngl, it amuses me how convoluted this line is so I'm leaving it as is
@@ -129,6 +131,8 @@ namespace NewEggStockMonitor
             PhoneNumber = Console.ReadLine();
             PhoneCarrier = PhoneCarrier.Replace("[PHONE_NUMBER]", PhoneNumber);
 
+            Console.Clear();
+
             static void WriteDefaultHeader()
             {
                 Console.Clear();
@@ -141,7 +145,6 @@ namespace NewEggStockMonitor
         {
             int pingDelay;
 
-            Console.Clear();
             Console.Write("How many seconds should I wait between each request made to NewEgg to check their stock? : ");
             if (!int.TryParse(Console.ReadLine(), out pingDelay))
             {
