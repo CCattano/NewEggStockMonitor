@@ -1,5 +1,12 @@
 # New Egg Stock Monitor
 
+## Table Of Contents
+- 1: [Installation Instructions](#Installation-Instructions)
+- 2: [Operating System Limitation Notes](#Operating-System-Limitation-Notes)
+- 3: [How To Use The SMS Notification Functionality](#How-To-Use-The-SMS-Notification-Functionality)
+
+## Description
+
 Wrote this to monitor NewEgg's stock of the AMD Ryzen9 5900X CPU
 
 I have email, sms, and browser notifications setup via [nowinstock.net](https://www.nowinstock.net/) for Amazon and B&H's listing of the 5900X
@@ -9,6 +16,62 @@ I have [BirdBot](https://nateskicks13.gitbook.io/bird-bot/) monitoring BestBuy.c
 That left NewEgg, I had no way to monitor that as they don't offer an in-stock email notification themselves.
 
 This solved that problem for me.
+
+## Installation Instructions
+Download Git [here](https://git-scm.com/downloads) and install it
+
+Download the .NET Core 3.1 SDK [here](https://dotnet.microsoft.com/download/dotnet-core/3.1) and install it
+
+Open a command prompt and verify that both Git and .NetCore3.1 have been installed
+
+To test Git run
+~~~bash
+git --version
+~~~
+You should get a version number back
+
+To test .NetCore3.1 run
+~~~bash
+dotnet --version
+~~~
+You should get a version number back
+
+Navigate to your desktop by running
+~~~bash
+cd desktop
+~~~
+Then download this repository with
+~~~bash
+git clone https://github.com/CCattano/NewEggStockMonitor.git
+~~~
+Navigate to the repo 
+~~~bash
+cd NewEggStockMonitor
+~~~
+Make a directory for the published program to go to.
+
+For Windows the following command would be used
+~~~bash
+mkdir Publish
+~~~
+Now navigate to the source code directory
+~~~bash
+cd Source
+~~~
+Now publish the source code
+
+Notice in the command below that the value of -r is, "win-x64" 
+
+Replace this with whatever runtime identifier (RID) is appropriate for your machine.
+
+[Here](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog) is a list of RIDs supported for the command
+~~~bash
+dotnet publish -r win-x64 -o ../Publish -p:PublishReadyToRun=true -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained true
+~~~
+Navigate to the published file and run the generated .exe
+~~~bash
+cd ../Publish & cls & NewEggStockMonitor.exe
+~~~
 
 ## Operating System Limitation Notes
 The console app uses the Windows OS user32.dll to grab the window and bring it to the foreground if the 5900X becomes in stock
