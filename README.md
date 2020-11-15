@@ -81,6 +81,8 @@ That way when the item comes in stock the window will pop up right in the middle
 
 Two, this won't work on linux/mac. I'd have put in funtionality to check for OS before trying to use the .dll, but this is a quick and dirty utility app that's not meant to be overly feature complete.
 
+If you're on Mac or Linux and want to use this, you could just comment out the invocation of the BringToFront method on line 225 before running the publish command in the installation instructions
+
 ## How To Use The SMS Notification Functionality
 
 *Tl:dr:*
